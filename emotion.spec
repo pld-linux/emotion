@@ -79,7 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING* README
 %attr(755,root,root) %{_bindir}/emotion_*
-%attr(755,root,root) %{_libdir}/libemotion.so.*
+%attr(755,root,root) %{_libdir}/libemotion.so.*.*.*
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_xine.so
 %{_libdir}/%{name}/emotion_decoder_xine.la

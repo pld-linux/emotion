@@ -1,4 +1,5 @@
-Summary:	Enlightenment Fundation Libraries - emotion
+Summary:	Enlightenment Fundation Libraries - Emotion
+Summary(pl):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
 Version:	0.0.1
 %define	_snap	20050105
@@ -19,22 +20,33 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Emotion is a Media Library.
 
+%description -l pl
+Emotion to biblioteka multimedialna.
+
 %package devel
-Summary:	Emotion headers, documentation and test programs
+Summary:	Emotion header files
+Summary(pl):	Pliki nag³ówkowe Emotion
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	xine-lib-devel
 
 %description devel
-Headers, test programs and documentation for Emotion.
+Header files for Emotion.
+
+%description devel -l pl
+Pliki nag³ówkowe Emotion.
 
 %package static
-Summary:	Static libraries
+Summary:	Static Emotion library
+Summary(pl):	Statyczna biblioteka Emotion
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static libraries.
+Static Emotion library.
+
+%description static -l pl
+Statyczna biblioteka Emotion.
 
 %prep
 %setup -q -n %{name}
@@ -50,8 +62,12 @@ Static libraries.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/xine/plugins/*/*.{la,a} \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,25 +78,22 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING* README
-%attr(755,root,root) %{_libdir}/libemotion.so.*
 %attr(755,root,root) %{_bindir}/emotion_*
+%attr(755,root,root) %{_libdir}/libemotion.so.*
+%dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_xine.so
+%{_libdir}/%{name}/emotion_decoder_xine.la
+%attr(755,root,root) %{_libdir}/xine/plugins/*/xineplug_vo_out_emotion.so
 %{_datadir}/%{name}
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/emotion-config
-%{_pkgconfigdir}/emotion.pc
 %attr(755,root,root) %{_libdir}/libemotion.so
 %{_libdir}/libemotion.la
-%dir %{_libdir}/%{name}
-%{_libdir}/%{name}/emotion_decoder_xine.la
-%attr(755,root,root) %{_libdir}/emotion/emotion_decoder_xine.so
-%attr(755,root,root) %{_libdir}/xine/plugins/*/xineplug_vo_out_emotion.so
-%{_libdir}/xine/plugins/*/xineplug_vo_out_emotion.la
 %{_includedir}/Emotion*
+%{_pkgconfigdir}/emotion.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libemotion.a
-%{_libdir}/emotion/emotion_decoder_xine.a
-%{_libdir}/xine/plugins/*/xineplug_vo_out_emotion.a

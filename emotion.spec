@@ -1,14 +1,12 @@
 Summary:	Enlightenment Fundation Libraries - Emotion
 Summary(pl):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
-Version:	0.0.1.003
-%define	_snap	20050701
-Release:	0.%{_snap}.0.1
+Version:	0.0.1.004
+Release:	1
 License:	BSD
 Group:		X11/Libraries
-#Source0:	http://dl.sourceforge.net/enlightenment/%{name}-%{version}.tar.gz
-Source0:	http://sparky.homelinux.org/snaps/enli/e17/libs/%{name}-%{_snap}.tar.gz
-# Source0-md5:	b93da3ce3da37483ad4721facb050744
+Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
+# Source0-md5:	3be5850cf23afeff8976e45a9861b7c4
 URL:		http://enlightenment.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -49,11 +47,11 @@ Static Emotion library.
 Statyczna biblioteka Emotion.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 %{__libtoolize}
-%{__aclocal} -I m4
+%{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}

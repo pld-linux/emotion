@@ -7,7 +7,7 @@ License:	BSD
 Group:		X11/Libraries
 Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
 # Source0-md5:	3be5850cf23afeff8976e45a9861b7c4
-URL:		http://enlightenment.org/
+URL:		http://enlightenment.org/Libraries/Emotion/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	edje-devel

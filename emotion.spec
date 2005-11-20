@@ -2,15 +2,19 @@ Summary:	Enlightenment Fundation Libraries - Emotion
 Summary(pl):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
 Version:	0.0.1.004
-Release:	1
+%define	_snap	20051116
+Release:	0.%{_snap}.1
 License:	BSD
 Group:		X11/Libraries
-Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
-# Source0-md5:	3be5850cf23afeff8976e45a9861b7c4
+#Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
+Source0:	http://sparky.homelinux.org/snaps/enli/e17/libs/%{name}-%{_snap}.tar.bz2
+# Source0-md5:	6faafbf9a01a9d31f0ed9c1c60b9062a
 URL:		http://enlightenment.org/Libraries/Emotion/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	edje
 BuildRequires:	edje-devel
+BuildRequires:	gstreamer-plugins-devel
 BuildRequires:	libtool
 BuildRequires:	xine-lib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -47,11 +51,11 @@ Static Emotion library.
 Statyczna biblioteka Emotion.
 
 %prep
-%setup -q
+%setup -q -n %{name}
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -79,8 +83,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/emotion_*
 %attr(755,root,root) %{_libdir}/libemotion.so.*.*.*
 %dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_gstreamer.so
 %attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_xine.so
-%{_libdir}/%{name}/emotion_decoder_xine.la
 %attr(755,root,root) %{_libdir}/xine/plugins/*/xineplug_vo_out_emotion.so
 %{_datadir}/%{name}
 
@@ -89,6 +93,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/emotion-config
 %attr(755,root,root) %{_libdir}/libemotion.so
 %{_libdir}/libemotion.la
+%{_libdir}/%{name}/emotion_decoder_gstreamer.la
+%{_libdir}/%{name}/emotion_decoder_xine.la
 %{_includedir}/Emotion*
 %{_pkgconfigdir}/emotion.pc
 

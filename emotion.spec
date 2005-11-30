@@ -1,9 +1,13 @@
+#
+# Conditional build:
+%bcond_without	static_libs	# don't build static library
+#
 Summary:	Enlightenment Fundation Libraries - Emotion
 Summary(pl):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
 Version:	0.0.1.004
 %define	_snap	20051116
-Release:	0.%{_snap}.1
+Release:	2.%{_snap}.1
 License:	BSD
 Group:		X11/Libraries
 #Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
@@ -16,6 +20,7 @@ BuildRequires:	edje
 BuildRequires:	edje-devel
 BuildRequires:	gstreamer-plugins-devel
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
 BuildRequires:	xine-lib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,7 +64,8 @@ Statyczna biblioteka Emotion.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	%{!?with_static_libs:--disable-static}
 %{__make}
 
 %install
@@ -98,6 +104,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/Emotion*
 %{_pkgconfigdir}/emotion.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libemotion.a
+%endif

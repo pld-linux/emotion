@@ -62,7 +62,7 @@ Statyczna biblioteka Emotion.
 
 %package decoder-gstreamer
 Summary:	Emotion decoder using gstreamer
-Summary(pl):	Dekoder Emotion uzywajacy gstreamera
+Summary(pl):	Dekoder Emotion u¿ywaj±cy gstreamera
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -70,11 +70,11 @@ Requires:	%{name} = %{version}-%{release}
 Emotion decoder using gstreamer.
 
 %description decoder-gstreamer -l pl
-Dekoder Emotion uzywajacy gstreamera.
+Dekoder Emotion u¿ywaj±cy gstreamera.
 
 %package decoder-xine
 Summary:	Emotion decoder using xine
-Summary(pl):	Dekoder Emotion uzywajacy xine
+Summary(pl):	Dekoder Emotion u¿ywaj±cy xine
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -82,7 +82,7 @@ Requires:	%{name} = %{version}-%{release}
 Emotion decoder using xine.
 
 %description decoder-xine -l pl
-Dekoder Emotion uzywajacy xine.
+Dekoder Emotion u¿ywaj±cy xine.
 
 %prep
 %setup -q -n %{name}

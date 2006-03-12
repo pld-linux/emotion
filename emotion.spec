@@ -1,27 +1,33 @@
 #
 # Conditional build:
+%bcond_without	gstreamer	# don't build gstreamer decoder
+%bcond_without	xine		# don't build xine decoder
 %bcond_without	static_libs	# don't build static library
+#
+%if %{without gstreamer} && %{without xine}
+error at last one backend must be enabled
+%endif
 #
 Summary:	Enlightenment Fundation Libraries - Emotion
 Summary(pl):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
 Version:	0.0.1.004
-%define	_snap	20051116
+%define	_snap	20060307
 Release:	2.%{_snap}.1
 License:	BSD
 Group:		X11/Libraries
 #Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
 Source0:	http://sparky.homelinux.org/snaps/enli/e17/libs/%{name}-%{_snap}.tar.bz2
-# Source0-md5:	6faafbf9a01a9d31f0ed9c1c60b9062a
+# Source0-md5:	fbc1342f7cc39575a117a76a87297b1d
 URL:		http://enlightenment.org/Libraries/Emotion/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	edje
 BuildRequires:	edje-devel
-BuildRequires:	gstreamer-plugins-devel
+%{?with_gstreamer:BuildRequires:	gstreamer-plugins-base-devel >= 0.10}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	xine-lib-devel
+%{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.1.1}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -35,7 +41,6 @@ Summary:	Emotion header files
 Summary(pl):	Pliki nag³ówkowe Emotion
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	xine-lib-devel
 
 %description devel
 Header files for Emotion.
@@ -55,6 +60,30 @@ Static Emotion library.
 %description static -l pl
 Statyczna biblioteka Emotion.
 
+%package decoder-gstreamer
+Summary:	Emotion decoder using gstreamer
+Summary(pl):	Dekoder Emotion uzywajacy gstreamera
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description decoder-gstreamer
+Emotion decoder using gstreamer.
+
+%description decoder-gstreamer -l pl
+Dekoder Emotion uzywajacy gstreamera.
+
+%package decoder-xine
+Summary:	Emotion decoder using xine
+Summary(pl):	Dekoder Emotion uzywajacy xine
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description decoder-xine
+Emotion decoder using xine.
+
+%description decoder-xine -l pl
+Dekoder Emotion uzywajacy xine.
+
 %prep
 %setup -q -n %{name}
 
@@ -65,7 +94,9 @@ Statyczna biblioteka Emotion.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_static_libs:--disable-static}
+	%{!?with_static_libs:--disable-static} \
+	%{?without_gstreamer:--disable-gstreamer} \
+	%{?without_xine:--disable-xine}
 %{__make}
 
 %install
@@ -73,9 +104,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-rm -f $RPM_BUILD_ROOT%{_libdir}/xine/plugins/*/*.{la,a} \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -89,10 +117,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/emotion_*
 %attr(755,root,root) %{_libdir}/libemotion.so.*.*.*
 %dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_gstreamer.so
-%attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_xine.so
-%attr(755,root,root) %{_libdir}/xine/plugins/*/xineplug_vo_out_emotion.so
 %{_datadir}/%{name}
+
+%if %{with gstreamer}
+%files decoder-gstreamer
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_gstreamer.so
+%endif
+
+%if %{with xine}
+%files decoder-xine
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_xine.so
+%endif
 
 %files devel
 %defattr(644,root,root,755)
@@ -100,7 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libemotion.so
 %{_libdir}/libemotion.la
 %{_libdir}/%{name}/emotion_decoder_gstreamer.la
-%{_libdir}/%{name}/emotion_decoder_xine.la
+#%{_libdir}/%{name}/emotion_decoder_xine.la
 %{_includedir}/Emotion*
 %{_pkgconfigdir}/emotion.pc
 

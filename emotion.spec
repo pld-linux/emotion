@@ -12,19 +12,24 @@ Summary:	Enlightenment Fundation Libraries - Emotion
 Summary(pl):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
 Version:	0.0.1.004
-%define	_snap	20060307
+%define	_snap	20060625
 Release:	2.%{_snap}.1
 License:	BSD
 Group:		X11/Libraries
 #Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
 Source0:	http://sparky.homelinux.org/snaps/enli/e17/libs/%{name}-%{_snap}.tar.bz2
-# Source0-md5:	fbc1342f7cc39575a117a76a87297b1d
+# Source0-md5:	aa4f66fba709b4b08c2ed49eda196657
 URL:		http://enlightenment.org/Libraries/Emotion/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	edje
 BuildRequires:	edje-devel
-%{?with_gstreamer:BuildRequires:	gstreamer-plugins-base-devel >= 0.10}
+%if %{with gstreamer}
+BuildRequires:	gstreamer-cdio
+BuildRequires:	gstreamer-devel >= 0.10.2
+BuildRequires:	gstreamer-ffmpeg
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.1
+%endif
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.1.1}

@@ -4,7 +4,7 @@
 %bcond_without	xine		# don't build xine decoder
 %bcond_without	static_libs	# don't build static library
 #
-%if %{without gstreamer} && %{without xine}
+%if !%{with gstreamer} && !%{with xine}
 error at last one backend must be enabled
 %endif
 #

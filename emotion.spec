@@ -100,8 +100,8 @@ Dekoder Emotion u¿ywaj±cy xine.
 %{__automake}
 %configure \
 	%{!?with_static_libs:--disable-static} \
-	%{?without_gstreamer:--disable-gstreamer} \
-	%{?without_xine:--disable-xine}
+	%{!?with_gstreamer:--disable-gstreamer} \
+	%{!?with_xine:--disable-xine}
 %{__make}
 
 %install

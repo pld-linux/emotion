@@ -9,7 +9,7 @@ error at last one backend must be enabled
 %endif
 #
 Summary:	Enlightenment Fundation Libraries - Emotion
-Summary(pl.UTF-8):   Podstawowe biblioteki Enlightenmenta - Emotion
+Summary(pl.UTF-8):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
 Version:	0.0.1.004
 %define	_snap	20060625
@@ -43,7 +43,7 @@ Emotion to biblioteka multimedialna.
 
 %package devel
 Summary:	Emotion header files
-Summary(pl.UTF-8):   Pliki nagłówkowe Emotion
+Summary(pl.UTF-8):	Pliki nagłówkowe Emotion
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -55,7 +55,7 @@ Pliki nagłówkowe Emotion.
 
 %package static
 Summary:	Static Emotion library
-Summary(pl.UTF-8):   Statyczna biblioteka Emotion
+Summary(pl.UTF-8):	Statyczna biblioteka Emotion
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -67,7 +67,7 @@ Statyczna biblioteka Emotion.
 
 %package decoder-gstreamer
 Summary:	Emotion decoder using gstreamer
-Summary(pl.UTF-8):   Dekoder Emotion używający gstreamera
+Summary(pl.UTF-8):	Dekoder Emotion używający gstreamera
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -79,7 +79,7 @@ Dekoder Emotion używający gstreamera.
 
 %package decoder-xine
 Summary:	Emotion decoder using xine
-Summary(pl.UTF-8):   Dekoder Emotion używający xine
+Summary(pl.UTF-8):	Dekoder Emotion używający xine
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 

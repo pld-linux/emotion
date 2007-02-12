@@ -9,7 +9,7 @@ error at last one backend must be enabled
 %endif
 #
 Summary:	Enlightenment Fundation Libraries - Emotion
-Summary(pl):	Podstawowe biblioteki Enlightenmenta - Emotion
+Summary(pl.UTF-8):   Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
 Version:	0.0.1.004
 %define	_snap	20060625
@@ -38,56 +38,56 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Emotion is a Media Library.
 
-%description -l pl
+%description -l pl.UTF-8
 Emotion to biblioteka multimedialna.
 
 %package devel
 Summary:	Emotion header files
-Summary(pl):	Pliki nag≥Ûwkowe Emotion
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe Emotion
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for Emotion.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe Emotion.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe Emotion.
 
 %package static
 Summary:	Static Emotion library
-Summary(pl):	Statyczna biblioteka Emotion
+Summary(pl.UTF-8):   Statyczna biblioteka Emotion
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static Emotion library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka Emotion.
 
 %package decoder-gstreamer
 Summary:	Emotion decoder using gstreamer
-Summary(pl):	Dekoder Emotion uøywaj±cy gstreamera
+Summary(pl.UTF-8):   Dekoder Emotion u≈ºywajƒÖcy gstreamera
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description decoder-gstreamer
 Emotion decoder using gstreamer.
 
-%description decoder-gstreamer -l pl
-Dekoder Emotion uøywaj±cy gstreamera.
+%description decoder-gstreamer -l pl.UTF-8
+Dekoder Emotion u≈ºywajƒÖcy gstreamera.
 
 %package decoder-xine
 Summary:	Emotion decoder using xine
-Summary(pl):	Dekoder Emotion uøywaj±cy xine
+Summary(pl.UTF-8):   Dekoder Emotion u≈ºywajƒÖcy xine
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description decoder-xine
 Emotion decoder using xine.
 
-%description decoder-xine -l pl
-Dekoder Emotion uøywaj±cy xine.
+%description decoder-xine -l pl.UTF-8
+Dekoder Emotion u≈ºywajƒÖcy xine.
 
 %prep
 %setup -q -n %{name}

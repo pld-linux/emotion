@@ -13,7 +13,7 @@ Summary(pl.UTF-8):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
 Version:	0.0.1.004
 %define	_snap	20060625
-Release:	2.%{_snap}.3
+Release:	2.%{_snap}.4
 License:	BSD
 Group:		X11/Libraries
 #Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz

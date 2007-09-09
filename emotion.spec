@@ -19,7 +19,7 @@ Group:		X11/Libraries
 #Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
 Source0:	http://sparky.homelinux.org/snaps/enli/e17/libs/%{name}-%{_snap}.tar.bz2
 # Source0-md5:	aa4f66fba709b4b08c2ed49eda196657
-URL:		http://enlightenment.org/Libraries/Emotion/
+URL:		http://enlightenment.org/p.php?p=about/libs/emotion
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	edje

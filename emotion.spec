@@ -5,34 +5,38 @@
 %bcond_without	static_libs	# don't build static library
 #
 %if !%{with gstreamer} && !%{with xine}
-error at last one backend must be enabled
+%error at last one backend must be enabled
 %endif
 #
 Summary:	Enlightenment Fundation Libraries - Emotion
 Summary(pl.UTF-8):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
-Version:	0.0.1.004
-%define	_snap	20060625
-Release:	2.%{_snap}.5
+Version:	0.0.1.005
+Release:	1
 License:	BSD
 Group:		X11/Libraries
-#Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
-Source0:	http://sparky.homelinux.org/snaps/enli/e17/libs/%{name}-%{_snap}.tar.bz2
-# Source0-md5:	aa4f66fba709b4b08c2ed49eda196657
+Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
+# Source0-md5:	e1550ff7a8f68b76b76a4d857073b3ee
 URL:		http://enlightenment.org/p.php?p=about/libs/emotion
 BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	edje
-BuildRequires:	edje-devel
+BuildRequires:	automake >= 1.4
+# ecore-evas ecore-job
+BuildRequires:	ecore-devel >= 0.9.9
+BuildRequires:	edje >= 0.5.0
+BuildRequires:	edje-devel >= 0.5.0
+BuildRequires:	evas-devel >= 0.9.9
 %if %{with gstreamer}
-BuildRequires:	gstreamer-cdio
 BuildRequires:	gstreamer-devel >= 0.10.2
-BuildRequires:	gstreamer-ffmpeg
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.1
+# gstreamer-cdio,gstreamer-ffmpeg for runtime, configure just warns if missing
 %endif
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.1.1}
+Requires:	ecore-evas >= 0.9.9
+Requires:	ecore-job >= 0.9.9
+Requires:	edje-libs >= 0.5.0
+Requires:	evas >= 0.9.9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,6 +50,10 @@ Summary:	Emotion header files
 Summary(pl.UTF-8):	Pliki nagłówkowe Emotion
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+# ecore-evas ecore-job
+Requires:	ecore-devel >= 0.9.9
+Requires:	edje-devel >= 0.5.0
+Requires:	evas-devel >= 0.9.9
 
 %description devel
 Header files for Emotion.
@@ -70,6 +78,10 @@ Summary:	Emotion decoder using gstreamer
 Summary(pl.UTF-8):	Dekoder Emotion używający gstreamera
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	gstreamer >= 0.10.2
+Requires:	gstreamer-plugins-base >= 0.10.1
+Suggests:	gstreamer-cdio
+Suggests:	gstreamer-ffmpeg
 
 %description decoder-gstreamer
 Emotion decoder using gstreamer.
@@ -82,6 +94,7 @@ Summary:	Emotion decoder using xine
 Summary(pl.UTF-8):	Dekoder Emotion używający xine
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	xine-lib >= 2:1.1.1
 
 %description decoder-xine
 Emotion decoder using xine.
@@ -90,7 +103,7 @@ Emotion decoder using xine.
 Dekoder Emotion używający xine.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 %{__libtoolize}
@@ -110,6 +123,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{a,la}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -124,6 +139,20 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %{_datadir}/%{name}
 
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/emotion-config
+%attr(755,root,root) %{_libdir}/libemotion.so
+%{_libdir}/libemotion.la
+%{_includedir}/Emotion.h
+%{_pkgconfigdir}/emotion.pc
+
+%if %{with static_libs}
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libemotion.a
+%endif
+
 %if %{with gstreamer}
 %files decoder-gstreamer
 %defattr(644,root,root,755)
@@ -134,20 +163,4 @@ rm -rf $RPM_BUILD_ROOT
 %files decoder-xine
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_xine.so
-%endif
-
-%files devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/emotion-config
-%attr(755,root,root) %{_libdir}/libemotion.so
-%{_libdir}/libemotion.la
-%{_libdir}/%{name}/emotion_decoder_gstreamer.la
-#%{_libdir}/%{name}/emotion_decoder_xine.la
-%{_includedir}/Emotion*
-%{_pkgconfigdir}/emotion.pc
-
-%if %{with static_libs}
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/libemotion.a
 %endif

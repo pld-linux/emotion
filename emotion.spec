@@ -8,6 +8,10 @@
 %error at last one backend must be enabled
 %endif
 #
+%define		ecore_ver	0.9.9
+%define		edje_ver	0.5.0
+%define		evas_ver	0.9.9
+
 Summary:	Enlightenment Fundation Libraries - Emotion
 Summary(pl.UTF-8):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
@@ -21,10 +25,10 @@ URL:		http://enlightenment.org/p.php?p=about/libs/emotion
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
 # ecore-evas ecore-job
-BuildRequires:	ecore-devel >= 0.9.9
-BuildRequires:	edje >= 0.5.0
-BuildRequires:	edje-devel >= 0.5.0
-BuildRequires:	evas-devel >= 0.9.9
+BuildRequires:	ecore-devel >= %{ecore_ver}
+BuildRequires:	edje >= %{edje_ver}
+BuildRequires:	edje-devel >= %{edje_ver}
+BuildRequires:	evas-devel >= %{evas_ver}
 %if %{with gstreamer}
 BuildRequires:	gstreamer-devel >= 0.10.2
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.1
@@ -33,10 +37,10 @@ BuildRequires:	gstreamer-plugins-base-devel >= 0.10.1
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.1.1}
-Requires:	ecore-evas >= 0.9.9
-Requires:	ecore-job >= 0.9.9
-Requires:	edje-libs >= 0.5.0
-Requires:	evas >= 0.9.9
+Requires:	ecore-evas >= %{ecore_ver}
+Requires:	ecore-job >= %{ecore_ver}
+Requires:	edje-libs >= %{edje_ver}
+Requires:	evas >= %{evas_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -51,9 +55,9 @@ Summary(pl.UTF-8):	Pliki nagłówkowe Emotion
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 # ecore-evas ecore-job
-Requires:	ecore-devel >= 0.9.9
-Requires:	edje-devel >= 0.5.0
-Requires:	evas-devel >= 0.9.9
+Requires:	ecore-devel >= %{ecore_ver}
+Requires:	edje-devel >= %{edje_ver}
+Requires:	evas-devel >= %{evas_ver}
 
 %description devel
 Header files for Emotion.

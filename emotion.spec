@@ -8,19 +8,19 @@
 %error at last one backend must be enabled
 %endif
 #
-%define		ecore_ver	0.9.9
-%define		edje_ver	0.5.0
-%define		evas_ver	0.9.9
+%define		ecore_ver	0.9.9.043
+%define		edje_ver	0.9.9.043
+%define		evas_ver	0.9.9.043
 
 Summary:	Enlightenment Fundation Libraries - Emotion
 Summary(pl.UTF-8):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
-Version:	0.0.1.005
+Version:	0.1.0.042
 Release:	1
 License:	BSD
 Group:		X11/Libraries
-Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
-# Source0-md5:	e1550ff7a8f68b76b76a4d857073b3ee
+Source0:	http://download.enlightenment.org/snapshots/2008-01-25/%{name}-%{version}.tar.bz2
+# Source0-md5:	123c043d02f4da22fb36eede930a44e5
 URL:		http://enlightenment.org/p.php?p=about/libs/emotion
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
@@ -139,13 +139,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING COPYING-PLAIN README TODO
 %attr(755,root,root) %{_bindir}/emotion_*
-%attr(755,root,root) %{_libdir}/libemotion.so.*.*.*
+%attr(755,root,root) %{_libdir}/libemotion.so.*
 %dir %{_libdir}/%{name}
 %{_datadir}/%{name}
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/emotion-config
+#%attr(755,root,root) %{_bindir}/emotion-config
 %attr(755,root,root) %{_libdir}/libemotion.so
 %{_libdir}/libemotion.la
 %{_includedir}/Emotion.h
@@ -160,11 +160,11 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with gstreamer}
 %files decoder-gstreamer
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_gstreamer.so
+%attr(755,root,root) %{_libdir}/%{name}/gstreamer.so
 %endif
 
 %if %{with xine}
 %files decoder-xine
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/emotion_decoder_xine.so
+%attr(755,root,root) %{_libdir}/%{name}/xine.so
 %endif

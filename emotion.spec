@@ -22,8 +22,8 @@ Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/snapshots/2008-01-25/%{name}-%{version}.tar.bz2
 # Source0-md5:	123c043d02f4da22fb36eede930a44e5
 URL:		http://enlightenment.org/p.php?p=about/libs/emotion
-BuildRequires:	autoconf
-BuildRequires:	automake >= 1.4
+BuildRequires:	autoconf >= 2.52
+BuildRequires:	automake >= 1.6
 # ecore-evas ecore-job
 BuildRequires:	ecore-devel >= %{ecore_ver}
 BuildRequires:	edje >= %{edje_ver}
@@ -139,13 +139,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING COPYING-PLAIN README TODO
 %attr(755,root,root) %{_bindir}/emotion_*
-%attr(755,root,root) %{_libdir}/libemotion.so.*
+%attr(755,root,root) %{_libdir}/libemotion.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libemotion.so.0
 %dir %{_libdir}/%{name}
 %{_datadir}/%{name}
 
 %files devel
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/emotion-config
 %attr(755,root,root) %{_libdir}/libemotion.so
 %{_libdir}/libemotion.la
 %{_includedir}/Emotion.h

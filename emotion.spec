@@ -8,19 +8,20 @@
 %error at last one backend must be enabled
 %endif
 #
-%define		ecore_ver	0.9.9.043
-%define		edje_ver	0.9.9.043
-%define		evas_ver	0.9.9.043
+%define		ecore_ver	0.9.9.044
+%define		edje_ver	0.9.9.044
+%define		evas_ver	0.9.9.044
+%define		_snap	20080813
 
 Summary:	Enlightenment Fundation Libraries - Emotion
 Summary(pl.UTF-8):	Podstawowe biblioteki Enlightenmenta - Emotion
 Name:		emotion
-Version:	0.1.0.042
-Release:	1
+Version:	0.1.0.043
+Release:	0.%{_snap}.1
 License:	BSD
 Group:		X11/Libraries
-Source0:	http://download.enlightenment.org/snapshots/2008-01-25/%{name}-%{version}.tar.bz2
-# Source0-md5:	123c043d02f4da22fb36eede930a44e5
+Source0:	%{name}-%{version}-%{_snap}.tar.bz2
+# Source0-md5:	c69f6fcd206cb6b0adab09ac0241d64d
 URL:		http://enlightenment.org/p.php?p=about/libs/emotion
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -107,7 +108,7 @@ Emotion decoder using xine.
 Dekoder Emotion używający xine.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{_snap}
 
 %build
 %{__libtoolize}

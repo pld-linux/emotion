@@ -21,6 +21,7 @@ License:	BSD-like
 Group:		Libraries
 Source0:	http://download.enlightenment.org/snapshots/LATEST/%{name}-%{version}.tar.bz2
 # Source0-md5:	1c4fb7c26f4324f4fcc343d6baa21e42
+Patch0:		%{name}-am.patch
 URL:		http://trac.enlightenment.org/e/wiki/Emotion
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1.6
@@ -41,6 +42,7 @@ BuildRequires:	gstreamer-plugins-base-devel >= 0.10.34
 %endif
 BuildRequires:	libtool
 BuildRequires:	pkgconfig >= 1:0.22
+BuildRequires:	sed >= 4.0
 %{?with_vlc:BuildRequires:	vlc-devel >= 0.9}
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.1.1}
 Requires:	ecore >= %{ecore_ver}
@@ -136,6 +138,10 @@ Dekoder Emotion używający vlc i wtyczkę generic biblioteki Emotion.
 
 %prep
 %setup -q
+%patch0 -p1
+
+# fix version for tarball not being svn checkout
+%{__sed} -i -e 's/^m4_define.*v_rev.*svnversion.*/m4_define([v_rev], [65643])/' configure.ac
 
 %build
 %{__libtoolize}

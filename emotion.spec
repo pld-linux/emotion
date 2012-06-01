@@ -5,23 +5,23 @@
 %bcond_without	xine		# don't build xine decoder
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	1.0.0
-%define		edje_ver	1.0.0
-%define		eet_ver		1.4.0
+%define		ecore_ver	1.2.0
+%define		edje_ver	1.2.0
+%define		eet_ver		1.6.0
 %define		eeze_ver	1.1.0
-%define		eina_ver	1.0.0
-%define		evas_ver	1.0.0
+%define		eina_ver	1.2.0
+%define		eio_ver		1.0.0
+%define		evas_ver	1.2.0
 
 Summary:	Emotion - EFL media playback library
 Summary(pl.UTF-8):	Emotion - biblioteka EFL do odtwarzania multimediów
 Name:		emotion
-Version:	0.2.0.65643
-Release:	3
+Version:	1.0.0
+Release:	1
 License:	BSD-like
 Group:		Libraries
-Source0:	http://download.enlightenment.org/snapshots/LATEST/%{name}-%{version}.tar.bz2
-# Source0-md5:	1c4fb7c26f4324f4fcc343d6baa21e42
-Patch0:		%{name}-am.patch
+Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
+# Source0-md5:	97d7297c5f26f129a0702863400a7c8a
 URL:		http://trac.enlightenment.org/e/wiki/Emotion
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1.6
@@ -33,7 +33,7 @@ BuildRequires:	edje >= %{edje_ver}
 BuildRequires:	edje-devel >= %{edje_ver}
 BuildRequires:	eet-devel >= %{eet_ver}
 BuildRequires:	eeze-devel >= %{eeze_ver}
-BuildRequires:	eio-devel
+BuildRequires:	eio-devel >= %{eio_ver}
 BuildRequires:	eina-devel >= %{eina_ver}
 BuildRequires:	evas-devel >= %{evas_ver}
 %if %{with gstreamer}
@@ -42,7 +42,6 @@ BuildRequires:	gstreamer-plugins-base-devel >= 0.10.34
 %endif
 BuildRequires:	libtool
 BuildRequires:	pkgconfig >= 1:0.22
-BuildRequires:	sed >= 4.0
 %{?with_vlc:BuildRequires:	vlc-devel >= 0.9}
 %{?with_xine:BuildRequires:	xine-lib-devel >= 2:1.1.1}
 Requires:	ecore >= %{ecore_ver}
@@ -53,6 +52,7 @@ Requires:	edje-libs >= %{edje_ver}
 Requires:	eet >= %{eet_ver}
 Requires:	eeze >= %{eeze_ver}
 Requires:	eina >= %{eina_ver}
+Requires:	eio >= %{eio_ver}
 Requires:	evas >= %{evas_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -72,7 +72,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe Emotion
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ecore-devel >= %{ecore_ver}
-Requires:	eio-devel
+Requires:	eio-devel >= %{eio_ver}
 Requires:	eet-devel >= %{eet_ver}
 Requires:	eeze-devel >= %{eeze_ver}
 Requires:	eina-devel >= %{eina_ver}
@@ -138,10 +138,6 @@ Dekoder Emotion używający vlc i wtyczkę generic biblioteki Emotion.
 
 %prep
 %setup -q
-%patch0 -p1
-
-# fix version for tarball not being svn checkout
-%{__sed} -i -e 's/^m4_define.*v_rev.*svnversion.*/m4_define([v_rev], [65643])/' configure.ac
 
 %build
 %{__libtoolize}
@@ -179,10 +175,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING COPYING-PLAIN ChangeLog README TODO
+%doc AUTHORS COPYING ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/emotion_test
 %attr(755,root,root) %{_libdir}/libemotion.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libemotion.so.0
+%attr(755,root,root) %ghost %{_libdir}/libemotion.so.1
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/em_generic.so
 %dir %{_libdir}/%{name}/utils
@@ -195,7 +191,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libemotion.so
 %{_libdir}/libemotion.la
-%{_includedir}/emotion-0
+%{_includedir}/emotion-1
 %{_pkgconfigdir}/emotion.pc
 
 %if %{with static_libs}

@@ -16,12 +16,12 @@
 Summary:	Emotion - EFL media playback library
 Summary(pl.UTF-8):	Emotion - biblioteka EFL do odtwarzania multimediów
 Name:		emotion
-Version:	1.7.0
-Release:	2
+Version:	1.7.1
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	26516d3e5ba55ba64f097e9d4e88af0f
+# Source0-md5:	20045813f6d26661694dd6eb25c1a14a
 URL:		http://trac.enlightenment.org/e/wiki/Emotion
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1.6
@@ -37,8 +37,8 @@ BuildRequires:	eio-devel >= %{eio_ver}
 BuildRequires:	eina-devel >= %{eina_ver}
 BuildRequires:	evas-devel >= %{evas_ver}
 %if %{with gstreamer}
-BuildRequires:	gstreamer-devel >= 0.10.2
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.34
+BuildRequires:	gstreamer0.10-devel >= 0.10.2
+BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.34
 %endif
 BuildRequires:	libtool
 BuildRequires:	pkgconfig >= 1:0.22
@@ -101,8 +101,8 @@ Summary:	Emotion decoder using gstreamer
 Summary(pl.UTF-8):	Dekoder Emotion używający gstreamera
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	gstreamer >= 0.10.2
-Requires:	gstreamer-plugins-base >= 0.10.34
+Requires:	gstreamer0.10 >= 0.10.2
+Requires:	gstreamer0.10-plugins-base >= 0.10.34
 
 %description decoder-gstreamer
 Emotion decoder using gstreamer.

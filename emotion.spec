@@ -16,12 +16,12 @@
 Summary:	Emotion - EFL media playback library
 Summary(pl.UTF-8):	Emotion - biblioteka EFL do odtwarzania multimediów
 Name:		emotion
-Version:	1.7.2
-Release:	2
+Version:	1.7.3
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	521d4943a34160dd267d50d3bf3ffb5e
+# Source0-md5:	1e7030c07fb1aa0e8ba8e06929e338b6
 URL:		http://trac.enlightenment.org/e/wiki/Emotion
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1.6

@@ -5,23 +5,23 @@
 %bcond_without	xine		# don't build xine decoder
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	1.7.6
-%define		edje_ver	1.7.6
-%define		eet_ver		1.7.6
-%define		eeze_ver	1.7.6
-%define		eina_ver	1.7.6
-%define		eio_ver		1.7.6
-%define		evas_ver	1.7.6
+%define		ecore_ver	1.7.7
+%define		edje_ver	1.7.7
+%define		eet_ver		1.7.7
+%define		eeze_ver	1.7.7
+%define		eina_ver	1.7.7
+%define		eio_ver		1.7.7
+%define		evas_ver	1.7.7
 
 Summary:	Emotion - EFL media playback library
 Summary(pl.UTF-8):	Emotion - biblioteka EFL do odtwarzania multimediów
 Name:		emotion
-Version:	1.7.6
+Version:	1.7.7
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	8acaf59704a628bdaa4eb0fb06a9ced5
+# Source0-md5:	b2621c0663b6fdc1408d0387a4d60c4b
 Patch0:		%{name}-am.patch
 URL:		http://trac.enlightenment.org/e/wiki/Emotion
 BuildRequires:	autoconf >= 2.60

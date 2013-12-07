@@ -1,3 +1,4 @@
+# NOTE: for versions >= 1.8 see efl.spec, emotion-decoders-generic.spec
 #
 # Conditional build:
 %bcond_without	gstreamer	# don't build gstreamer decoder

@@ -140,7 +140,7 @@ Dekoder Emotion używający vlc i wtyczkę generic biblioteki Emotion.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %{__libtoolize}
